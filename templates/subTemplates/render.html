@@ -1,0 +1,6 @@
+<!-- Navigation menu with font awesome icons, dynamic url with jinja url_for
+    Class is set to active with matching path to highlight current location on the menu -->
+<ul class="nav menu">
+    <li class="{{'active' if request.path=="/" }}"><a href="{{ url_for('main') }}"><em class="fa fa-wheelchair-alt">&nbsp;</em> Mes Patients</a></li>
+    <li class="{{'active' if request.path=="/calendar" }}"><a href="{{ url_for('calendar') }}"><em class="fa fa-calendar-plus-o">&nbsp;</em> Mon Planning</a></li>
+</ul>

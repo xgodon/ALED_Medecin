@@ -1,0 +1,26 @@
+<!-- Application sideBar with account elements -->
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+    <div class="profile-sidebar">
+        <div class="profile-userpic">
+            <img src="{{ url_for('static', filename='images/psychatre.jpg') }}" class="img-responsive" alt="">
+        </div>
+        <!-- TODO: Link this to the user profile -->
+        <div class="profile-usertitle">
+            <div class="profile-usertitle-name">{{ config["medecin"] }}</div>
+            <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!-- The part with the search engine of the platform -->
+    <!-- TODO: Find how it could be implemented or remove it -->
+    <div class="divider"></div>
+    <form role="search">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+    </form>
+    <!-- Include the menu using another template and bind it with id reload to reload it with ajax if change needed -->
+    <div id="reload">
+        {% include 'subTemplates/render.html' %}
+    </div>
+</div><!--/.sidebar-->
