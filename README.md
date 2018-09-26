@@ -4,22 +4,33 @@
 
 ### Pour Windows :
 
-Logiciels nécessaire :
-git
-python 3.x
+#### Logiciels nécessaire :
 
-Installation de modules pythons :
-From a cmd prompt, use > Path\easy_install.exe requests, where Path is your Python*\Scripts folder, if it was installed. (For example: C:\Python32\Scripts\easy_install.exe)
+- git
+- python 3.x
 
-Récupérer le projet :
+#### Installation de modules pythons :
+
+Se déplacer dans le répertoire d'installation de python, puis le répertoire Scripts, et exécutez les commandes suivantes :
+- easy_install.exe requests
+- easy_install.exe flask_login
+
+#### Récupérer le projet :
+
 git pull https://github.com/xgodon/ALED_Medecin
 
-Activer l'environnement virtuel
+#### Activer l'environnement virtuel
+
 venv\Scripts\activate
 
-Installer Flask
-pip install Flask
-set FLASK_APP=app.py
+#### Installer Flask
+
+- pip install Flask
+- pip install flask-sqlalchemy
+- pip install passlib
+- set FLASK_APP=app.py
+
+#### Lancer Le serveur
 
 python -m flask run
 
