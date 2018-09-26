@@ -63,12 +63,10 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column1">Civilité</th>
-									<th class="cell100 column2">Nom</th>
-									<th class="cell100 column3">Prénom</th>
-									<th class="cell100 column4">Téléphone</th>
-									<th class="cell100 column5">Date</th>
-									<th class="cell100 column6">Durée</th>
+									<th class="cell100 column1">Nom</th>
+									<th class="cell100 column2">Raison</th>
+									<th class="cell100 column5">Debut</th>
+									<th class="cell100 column5">Fin</th>
 									<th class="cell100 column7">Action</th>
                             </thead>
 								</tr>
@@ -81,13 +79,11 @@
 							<tbody>
                             {% for patient in patients %}
 								<tr class="row100 body">
-                                    <td class="cell100 column1">{{ patient[0] }}</td>
-                                    <td class="cell100 column2">{{ patient[1] }}</td>
-                                    <td class="cell100 column3">{{ patient[2] }}</td>
-                                    <td class="cell100 column4">{{ patient[3] }}</td>
-                                    <td class="cell100 column5"></td>
-                                    <td class="cell100 column6"></td>
-                                    <td class="cell100 column7" style="white-space:nowrap;"><a onclick="accept()"><em class="fa fa-check"></em></a><a onclick="refuse()"><em class="fa fa-close"></em></a><a onclick="schedule()"><em class="fa fa-edit"></em></a></td>
+                                    <td class="cell100 column1">{{ patient["name"] }}</td>
+                                    <td class="cell100 column2">{{ patient["reason"] }}</td>
+                                    <td class="cell100 column5">{{ patient["start"] }}</td>
+                                    <td class="cell100 column5">{{ patient["end"] }}</td>
+                                    <td class="cell100 column7"><a onclick="accept()"><em class="fa fa-check fa-2x"></em></a><a onclick="refuse()"><em class="fa fa-close fa-2x"></em></a><a onclick="schedule()"><em class="fa fa-edit fa-2x"></em></a></td>
                                 </tr>
                             {% endfor %}
 							</tbody>

@@ -6,6 +6,35 @@ from werkzeug.utils import secure_filename
 import requests
 
 base_URL = "https://fhir.eole-consulting.io/api/"
+userID = "5ba8b7752eef950010bbb5b4"
+
+
+def getMyAppointements():
+    res = requests.get(base_URL+"appointment?participant.actor.reference=Practitioner/"+userID).json()
+    ldmc = []
+    for liste in res:
+        id = liste["id"]
+        try:
+            reason = liste["appointmentType"]["coding"][0]["display"]
+        except KeyError:
+            reason = "Auncune raison"
+        try:
+            start = liste["requestedPeriod"][0]["start"]
+            end = liste["requestedPeriod"][0]["end"]
+        except KeyError:
+            start = "Non spécifié"
+            end = start
+        name = "JM"
+        try:
+            status = liste["status"]
+        except KeyError:
+            status = "Non spécifié"
+        for element in liste["participant"]:
+            if "Patient" in element["actor"]["reference"]:
+                name = element["actor"]["display"]
+
+        ldmc.append({"id":id, "type":status, "name": name, "reason": reason, "start":start, "end":end})
+    return ldmc
 
 @app.route('/')
 def main():
@@ -15,14 +44,21 @@ def main():
 
 @app.route('/calendar')
 def calendar():
-    return render_template("planning.html")\
+    return render_template("planning.html")
 
 
 
 @app.route('/appointment')
 def appointment():
-    patient = getAllPatientData()
-    return render_template("appointment.html", patients=patient)
+    appointements = getMyAppointements()
+    res = []
+    for element in appointements:
+        try:
+            if element["type"] == "proposed" or element["type"] == "pending":
+                res.append(element)
+        except KeyError:
+            pass
+    return render_template("appointment.html", patients=res)
 
 
 # The login/logout part only front end for the moment
@@ -102,28 +138,33 @@ def getPatient(id):
     res = get("patient", id).json()
     return res
 
-
 def getPatientData(id):
     res = getPatient(id)
-    name = res["name"][0]
-    family = name["family"]
-    name = " ".join(name["given"])
-    gender = res["gender"]
+    try:
+        name = res["name"][0]
+        family = name["family"]
+        name = " ".join(name["given"])
+    except KeyError:
+        name = "Le keum a pas de nom"
+        family = "Gros boulet"
+    try:
+        gender = res["gender"]
+        if gender == "male":
+            gender = "Monsieur"
+        elif gender == "female":
+            gender = "Madame"
+        else:
+            gender = "Non Binaire"
+    except KeyError:
+        gender = "Fais pas nimp"
     telecom = res["telecom"][1]["value"]
     address = res["address"][0]["text"]
-    if gender == "male":
-        gender = "Monsieur"
-    elif gender == "female":
-        gender = "Madame"
-    else:
-        gender = "Non Binaire"
     return gender, family, name, telecom, address
 
 
 def getAllPatientData():
     myPatients = []
     patientsID = getAllPatientId()
-    print(patientsID)
     for id in patientsID:
         myPatients.append(getPatientData(id))
     return myPatients
