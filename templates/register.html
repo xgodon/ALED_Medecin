@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'subTemplates/head.html' %}
+	<link href="{{ url_for('static', filename='css/jquery-confirm.css') }}" rel="stylesheet">
+</head>
+<body>
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+			<div class="login-panel panel panel-default">
+				<div class="panel-heading">S'enregistrer</div>
+				<div class="panel-body">
+					<form role="form" method="post">
+						<fieldset>
+							<div class="form-group">
+								<input class="form-control" placeholder="Utilisateur" name="username" type="text" required="required" autofocus="" value="{{ username }}">
+							</div>
+                            <div class="form-group">
+								<input class="form-control" placeholder="E-mail" name="email" type="text" required="required" autofocus="" value="{{ mail }}">
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="Mot de passe" name="password" type="password" required="required" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" value="">
+							</div>
+                            <div class="form-group">
+								<input class="form-control" placeholder="Confirmer mot de passe" name="password2" type="password" required="required" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" value="">
+							</div>
+							<div class="checkbox">
+								<label>
+									<input name="remember" type="checkbox" required="required" value="Remember Me">J'accepte les conditions de cette plateforme
+								</label>
+							</div>
+							<input class="btn btn-primary btn-md" id="btn-chat" type="submit" value="Envoyer">
+					    </form>
+				</div>
+			</div>
+		</div><!-- /.col-->
+	</div><!-- /.row -->
+
+
+<script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery-confirm.js') }}"></script>
+    <script>
+
+        function isValidName(name){
+            return 2 < name.length && name.length < 13;
+        }
+
+        function isValidEmailAddress(emailAddress) {
+            let pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
+            return pattern.test(emailAddress);
+        }
+
+        function isValidPassword(password) {
+            let pattern = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+            $('input[name=password2]').trigger("input");
+            return pattern.test(password);
+        }
+
+        function isMatchingPassword(password) {
+            return password == $('input[name=password]').val();
+        }
+
+        // Add error message element after input.
+        let username = $('input[name=username]');
+        let mail = $('input[name=email]');
+        let pass = $('input[name=password]');
+        let pwd = $('input[name=password2]');
+
+        function validate(input, func, message){
+            input.after('<span class="error-message">'+message+'</span>');
+            input.on('input', function () {
+                if (func(input.val()) || input.val().length == 0){
+                    input.addClass("valid");
+                    input.removeClass("invalid");
+                 }else{
+                    input.addClass("invalid");
+                    input.removeClass("valid");
+            }
+            })
+        }
+
+        validate(username,isValidName, "Enter 3 to 12 characters");
+        validate(mail, isValidEmailAddress,"Enter a valid mail address");
+        validate(pass, isValidPassword,"Password length must be at least 8 and contains lowercase, uppercase, number and special characters");
+        validate(pwd, isMatchingPassword,"Two passwords not matching");
+
+        $(document).ready(function() {
+            $("form :input").each(function(){
+            $(this).trigger("input");
+            });
+    });
+
+    </script>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}
+         {% for category, message in messages %}
+                 <script>
+        $.confirm({
+                icon: 'fa fa-warning',
+        title: '{{ category }}',
+        content: '{{ message }}',
+        type: 'red',
+        typeAnimated: true,
+        buttons: {
+                    close: {
+                        text: 'Close',
+                        btnClass: 'btn-red',
+                        action: function(){
+                        }
+                    }
+                }
+        });
+            </script>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+</body>
+</html>

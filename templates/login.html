@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'subTemplates/head.html' %}
+	<link href="{{ url_for('static', filename='css/jquery-confirm.css') }}" rel="stylesheet">
+</head>
+<body>
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+			<div class="login-panel panel panel-default">
+				<div class="panel-heading">Connectez-vous</div>
+				<div class="panel-body">
+					<form role="form" method="post">
+						<fieldset>
+							<div class="form-group">
+								<input class="form-control" placeholder="E-mail ou Utilisateur" name="email" type="text" required="required" autofocus="">
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="Mot de passe" name="password" type="password" required="required" value="">
+							</div>
+							<div class="checkbox">
+								<label>
+									<input name="remember" type="checkbox" value="Remember Me">Se souvenir de moi
+								</label>
+							</div>
+							<input class="btn btn-primary btn-md" id="btn-chat" type="submit" value="Connexion">
+					    </form>
+                    <a href="/register" class="btn btn-primary btn-md">S'enregistrer</a>
+                    <a id="recovery">Identifiants oubliés</a>
+				</div>
+			</div>
+		</div><!-- /.col-->
+	</div><!-- /.row -->	
+	
+
+<script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-confirm.js') }}"></script>
+    <script>
+
+       function isValidEmailAddress(emailAddress) {
+    let pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
+    return pattern.test(emailAddress);
+}
+
+        $("#recovery").click(function() {
+            $.confirm({
+                title: 'Password recovery',
+                type: 'blue',
+                content: '' +
+                '<form action="" class="formName">' +
+                '<div class="form-group">' +
+                '<label>Enter your account e-mail</label>' +
+                '<input type="email" placeholder="E-mail address" class="mail form-control" required="required" />' +
+                '</div>' +
+                '</form>',
+                buttons: {
+                    formSubmit: {
+                        text: 'Submit',
+                        btnClass: 'btn-blue',
+                        action: function () {
+                            let mail = this.$content.find('.mail').val();
+                            if (!mail || !isValidEmailAddress(mail)) {
+                                $.alert({
+                                    type: "red",
+                                    btn:'btn-red',
+                                    title: "Error",
+                                    content: 'Provide a valid e-mail'
+                                });
+                                return false;
+                            }
+                            recover(mail);
+                        }
+                    },
+                    cancel: function () {
+                        // Close
+                    },
+                },
+                onContentReady: function () {
+                    // Bind to events
+                    let jc = this;
+                    this.$content.find('form').on('submit', function (e) {
+                        // If the user submits the form by pressing enter in the field.
+                        e.preventDefault();
+                        jc.$$formSubmit.trigger('click'); // Reference the button and click it
+                    });
+                }
+            });
+        });
+        function confirm_error() {
+            $.confirm({
+                icon: 'fa fa-warning',
+                title: 'Failure',
+                content: 'There has been an issue sending the confirmation retry in a few minutes',
+                type: 'orange',
+                typeAnimated: true,
+                buttons: {
+                    close: {
+                        text: 'Ok',
+                        btnClass: 'btn-orange',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+        }
+
+            function resend(mail){
+                $.ajax({
+                            url: '/sendConfirm',
+                            type: "POST",
+                            data: {"mail": mail },
+                            success: function (response) {
+                                $.confirm({
+                                    icon: 'fa fa-check',
+                                    title: 'Resent',
+                                    content: 'A mail confirmation has been resent to your account e-mail, check your inbox in few minutes',
+                                    type: 'green',
+                                    typeAnimated: true,
+                                    buttons: {
+                                        close: {
+                                            text: 'Ok',
+                                            btnClass: 'btn-green',
+                                            action: function () {
+                                            }
+                                        }
+                                    }
+                                });
+                            },
+                            error: function (error) {
+                                console.log(error);
+                                confirm_error();
+                            }
+                        });
+            }
+            function recover_error() {
+            $.confirm({
+                icon: 'fa fa-warning',
+                title: 'Failure',
+                content: 'The server is unable to send the recovery mail retry in a few minutes',
+                type: 'orange',
+                typeAnimated: true,
+                buttons: {
+                    close: {
+                        text: 'Ok',
+                        btnClass: 'btn-orange',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+        }
+             function recover(mail){
+                $.ajax({
+                            url: '/resetPass',
+                            type: "POST",
+                            data: {"mail": mail },
+                            success: function (response) {
+                                $.confirm({
+                                    icon: 'fa fa-check',
+                                    title: 'Recovery sent',
+                                    content: 'A password recovery mail has been resent to your account e-mail, check your inbox in few minutes',
+                                    type: 'green',
+                                    typeAnimated: true,
+                                    buttons: {
+                                        close: {
+                                            text: 'Ok',
+                                            btnClass: 'btn-green',
+                                            action: function () {
+                                            }
+                                        }
+                                    }
+                                });
+                            },
+                            error: function (error) {
+                                console.log(error);
+                                recover_error();
+                            }
+                        });
+            }
+        </script>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}
+         {% for category, message in messages %}
+             {% if category == "Confirmation sent" %}
+             <script>
+             mail = $("input[name=email]").val();
+        $.confirm({
+            icon: 'fa fa-check',
+            title: '{{ category }}',
+            content: '{{ message }}',
+            type: 'green',
+            typeAnimated: true,
+            buttons: {
+                resend: {
+                    text: 'Resend',
+                    btnClass: 'btn-orange',
+                    action: function () {
+                        resend("{{message.split(" ")[-1]}}");
+                    }
+                },
+                close: {
+                                            text: 'Ok',
+                                            btnClass: 'btn-green',
+                                            action: function () {
+                                            }
+                                        }
+            }
+        });
+
+            </script>
+                 {% elif category == "Account Activated" or category == "Success" %}
+                 <script>
+        $.confirm({
+                icon: 'fa fa-check',
+        title: '{{ category }}',
+        content: '{{ message }}',
+        type: 'green',
+        typeAnimated: true,
+        buttons: {close: {
+                        text: 'Close',
+                        btnClass: 'btn-green',
+                        action: function(){
+                        }
+                    }}
+        });
+        </script>
+             {% else %}
+                 <script>
+        $.confirm({
+                icon: 'fa fa-warning',
+        title: '{{ category }}',
+        content: '{{ message }}',
+        type: 'red',
+        typeAnimated: true,
+        buttons: {
+            {% if category == "Not Activated" %}
+                    resend: {
+                        text: 'Resend',
+                        btnClass: 'btn-orange',
+                        action: function(){
+                            resend("{{session['mail']}}");
+                        }
+                    },
+        {% endif %}
+                    close: {
+                        text: 'Close',
+                        btnClass: 'btn-red',
+                        action: function(){
+                        }
+                    }
+                }
+        });
+            </script>
+             {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+</body>
+</html>
