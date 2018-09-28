@@ -2,6 +2,10 @@
 
 ## Installation :
 
+### Avec Docker :
+
+docker run -p 5000:5000  nerka/aled_medecin
+
 ### Pour Windows :
 
 #### Logiciels nécessaire :
@@ -9,15 +13,14 @@
 - git
 - python 3.x
 
-#### Installation de modules pythons :
+#### Installation des dépendances :
 
-Se déplacer dans le répertoire d'installation de python, puis le répertoire Scripts, et exécutez les commandes suivantes :
-- easy_install.exe requests
-- easy_install.exe flask_login
+Se déplacer dans le répertoire d'installation de python, puis le répertoire Scripts, et exécutez :
+pip install -r requirement.txt
 
 #### Récupérer le projet :
 
-git pull https://github.com/xgodon/ALED_Medecin
+git clone https://github.com/xgodon/ALED_Medecin
 
 #### Activer l'environnement virtuel
 
@@ -25,9 +28,6 @@ venv\Scripts\activate
 
 #### Installer Flask
 
-- pip install Flask
-- pip install flask-sqlalchemy
-- pip install passlib
 - set FLASK_APP=app.py
 
 #### Lancer Le serveur

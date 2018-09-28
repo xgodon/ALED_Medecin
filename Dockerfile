@@ -1,13 +1,14 @@
-FROM debian
+FROM python:3
 
 ADD . /ALED_Medecin
-RUN apt-get update
-RUN apt-get install -y python3-pip
 
 WORKDIR  /ALED_Medecin 
-RUN venv/bin/activate
-RUN pip install Flask
+
+RUN apt-get update
+RUN pip install -r /ALED_Medecin/requirement.txt
 RUN export FLASK_APP=app.py
-RUN flask run
+RUN chmod +x /ALED_Medecin/entrypoint.sh
+
+ENTRYPOINT /ALED_Medecin/entrypoint.sh
 
 EXPOSE 5000
