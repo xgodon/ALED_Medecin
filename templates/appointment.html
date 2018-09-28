@@ -7,6 +7,7 @@
     <link href="{{ url_for('static', filename='css/animate.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/perfect-scrollbar.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/datetimepicker.css') }}" rel="stylesheet">
 </head>
 <body>
     {% include 'subTemplates/navBar.html' %}
@@ -83,14 +84,12 @@
                                     <td class="cell100 column2">{{ patient["reason"] }}</td>
                                     <td class="cell100 column5">{{ patient["start"] }}</td>
                                     <td class="cell100 column5">{{ patient["end"] }}</td>
-                                    <td class="cell100 column7"><a onclick="accept()"><em class="fa fa-check fa-2x"></em></a><a onclick="refuse()"><em class="fa fa-close fa-2x"></em></a><a onclick="schedule()"><em class="fa fa-edit fa-2sx"></em></a></td>
+                                    <td class="cell100 column7"><a onclick="accept('{{ patient["id"] }}')"><em class="fa fa-check fa-2x"></em></a><a onclick="refuse('{{ patient["id"] }}')"><em class="fa fa-close fa-2x"></em></a><a onclick="schedule('{{ patient["id"] }}')"><em class="fa fa-edit fa-2x"></em></a></td>
                                 </tr>
                             {% endfor %}
 							</tbody>
 						</table>
 					<div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 585px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 291px;"></div></div></div>
-
-                    </div>
                     </div>
         {% include 'subTemplates/footer.html' %}
 		</div><!--/.row-->
@@ -104,70 +103,145 @@
     <script src="{{ url_for('static', filename='js/select2.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-datetimepicker.js') }}"></script>
         <script>
-            function observation() {
-    $.confirm({
-        title: 'Observation',
-        content: '' +
-        '<form action="" class="formName">' +
-        '<div class="form-group">' +
-        '<label>Entrer votre observation dans le champs ci dessous</label>' +
-        '<textarea rows="10" cols="200" placeholder="Votre observation" class="name form-control" required />' +
-        '</div>' +
-        '</form>',
-        buttons: {
-            formSubmit: {
-                text: 'Envoyer',
-                btnClass: 'btn-blue',
-                action: function () {
-                    let name = this.$content.find('.name').val();
-                    if(!name) {
-                        $.alert({
-                            title: "Erreur",
-                            content: 'Une erreur est survenue lors de l\'envoi de votre observation'
-                        });
-                        return false;
-                    }
-                    // Server side processing of the button through the /copy url
-                    $.ajax({
-                        url: '/copy',
+            function accept(id) {
+                console.log(this.index);
+                $.confirm({
+                 title: 'Success!',
+                content: 'Votre rendez-vous a bien était confirmé',
+                type: 'blue',
+                typeAnimated: true,
+                buttons: {
+                    ok: {
+                    text: 'Ok',
+                    btnClass: 'btn-blue',
+                    action: function(){
+                        $.ajax({
+                        url: '/acceptAppointment',
                         global: false,
                         type: "POST",
-                        data: {index: "ckan", name : name},
+                        data: {"id": id},
                         success: function(response) {
-                            // We reload only the sideBar Datasets elements here
-                            $("#reload").html(response);
+                            location.reload();
                         },
                         error: function(error) {
                             console.log(error);
                         }
                     });
-                    $.alert({
-                        title: "Success",
-                        container: "#dataTable_wrapper",
-                        // There we use escapeHtml function from xss.js to prevent XSS breach
-                        content: 'The <b>' +  escapeHtml(name) + '</b> dataset imported from <b> CKAN </b> has been created succesfully'
+                    }
+                    }
+                     }
                     });
-                }
-            },
-            cancel: {
-                text: 'Annuler',
-                action: function () {
-                // Close
-                }
-            },
-        },
-        onContentReady: function () {
-            // Bind to events
-            let jc = this;
-            this.$content.find('form').on('submit', function (e) {
-                // If the user submits the form by pressing enter in the field.
-                e.preventDefault();
-                jc.$$formSubmit.trigger('click'); // Reference the button and click it
+            }
+        </script>
+            <script>
+            function refuse(id) {
+
+                $.confirm({
+                 title: 'Success!',
+                content: 'Votre rendez-vous a bien était annulé',
+                type: 'blue',
+                typeAnimated: true,
+                buttons: {
+                    ok: {
+                    text: 'Ok',
+                    btnClass: 'btn-blue',
+                    action: function(){
+                        $.ajax({
+                        url: '/refuseAppointment',
+                        global: false,
+                        type: "POST",
+                        data: {"id": id},
+                        success: function(response) {
+                            location.reload();
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                    }
+                    }
+                     }
+                    });
+            }
+        </script>
+
+         <script>
+            function schedule(id) {
+                $.confirm({
+                 title: 'Choisisez les nouvelles dates',
+                content:                       '<div id="datetimepicker1" class="input-append date">'+
+      '<input type="text" class="picker1"/>'+
+      '<span class="add-on">'+
+        '<i data-time-icon="fa fa-calendar-o" data-date-icon="fa fa-calendar"></i>'+
+      '</span>'+
+    '</div>'+
+                    '<div id="datetimepicker2" class="input-append date">'+
+      '<input type="text" class="picker2"/>'+
+      '<span class="add-on">'+
+        '<i data-time-icon="fa fa-calendar-o" data-date-icon="fa fa-calendar"></i>'+
+      '</span>'+
+    '</div>',
+                    onContentReady: function(){
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                },
+                locale: 'fr'
             });
-        }
-    });
-}
+            $('#datetimepicker2').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                },
+                locale: 'fr'
+            });
+        });
+    },
+                type: 'blue',
+                typeAnimated: true,
+                buttons: {
+                    ok: {
+                    text: 'Ok',
+                    btnClass: 'btn-blue',
+                    action: function(){
+                         $.confirm({
+                 title: 'Success!',
+                content: 'Votre rendez-vous a bien était décalé',
+                type: 'blue',
+                typeAnimated: true,
+                buttons: {
+                    ok: {
+                    text: 'Ok',
+                    btnClass: 'btn-blue',
+                    action: function(){}}}});
+                        let start = this.$content.find('.picker1').val();
+                        let end = this.$content.find('.picker2').val();
+                        $.ajax({
+                        url: '/scheduleAppointment',
+                        global: false,
+                        type: "POST",
+                        data: {"id": id, "start": start, "end": end},
+                        success: function(response) {
+                            location.reload();
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                    }
+                    }
+                     }
+                    });
+            }
+
         </script>
 
 </body>

@@ -85,7 +85,7 @@
                                     <td class="cell100 column3">{{ patient[2] }}</td>
                                     <td class="cell100 column4">{{ patient[3] }}</td>
                                     <td class="cell100 column5">{{ patient[4] }}</td>
-                                    <td class="cell100 column6" style="white-space:nowrap;"><a onclick="observation()">Ajouter une observation</a></td>
+                                    <td class="cell100 column6" style="white-space:nowrap;"><a onclick="observation('{{ patient[5] }}')">Ajouter une observation</a></td>
                                 </tr>
                             {% endfor %}
 							</tbody>
@@ -106,24 +106,25 @@
     <script src="{{ url_for('static', filename='js/select2.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
-        <script>
-            function observation() {
+           <script>
+            function observation(id) {
     $.confirm({
         title: 'Observation',
         content: '' +
-        '<form action="" class="formName">' +
-        '<div class="form-group">' +
-        '<label>Entrer votre observation dans le champs ci dessous</label>' +
-        '<textarea rows="10" cols="200" placeholder="Votre observation" class="name form-control" required />' +
-        '</div>' +
-        '</form>',
+            '<form id="form" action="" class="formName">' +
+            '<div class="form-group">' +
+            '<label>'+
+            '<label>Entrer votre observation sur le poids du patient </label>' +
+            '<input type="number" name="patientPoids"  class="dataweight form-control required autofocus"/>'+
+            '<br>'+
+            '</form>',
         buttons: {
             formSubmit: {
                 text: 'Envoyer',
                 btnClass: 'btn-blue',
                 action: function () {
-                    let name = this.$content.find('.name').val();
-                    if(!name) {
+                    let val = this.$content.find('.dataweight').val();
+                    if(!val) {
                         $.alert({
                             title: "Erreur",
                             content: 'Une erreur est survenue lors de l\'envoi de votre observation'
@@ -132,10 +133,10 @@
                     }
                     // Server side processing of the button through the /copy url
                     $.ajax({
-                        url: '/copy',
+                        url: '/newObservation',
                         global: false,
                         type: "POST",
-                        data: {index: "ckan", name : name},
+                        data: {patientID : id, weight : val},
                         success: function(response) {
                             // We reload only the sideBar Datasets elements here
                             $("#reload").html(response);
@@ -143,12 +144,6 @@
                         error: function(error) {
                             console.log(error);
                         }
-                    });
-                    $.alert({
-                        title: "Success",
-                        container: "#dataTable_wrapper",
-                        // There we use escapeHtml function from xss.js to prevent XSS breach
-                        content: 'The <b>' +  escapeHtml(name) + '</b> dataset imported from <b> CKAN </b> has been created succesfully'
                     });
                 }
             },

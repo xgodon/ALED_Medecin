@@ -4,6 +4,7 @@ from utils.token import confirm_token, send_activate
 from utils.database import *
 from werkzeug.utils import secure_filename
 import requests
+import json
 
 base_URL = "https://fhir.eole-consulting.io/api/"
 userID = "5ba8b7752eef950010bbb5b4"
@@ -19,8 +20,8 @@ def getMyAppointements():
         except KeyError:
             reason = "Auncune raison"
         try:
-            start = liste["requestedPeriod"][0]["start"]
-            end = liste["requestedPeriod"][0]["end"]
+            start = tranformDate(liste["requestedPeriod"][0]["start"])
+            end = tranformDate(liste["requestedPeriod"][0]["end"])
         except KeyError:
             start = "Non spécifié"
             end = start
@@ -36,6 +37,11 @@ def getMyAppointements():
         ldmc.append({"id":id, "type":status, "name": name, "reason": reason, "start":start, "end":end})
     return ldmc
 
+def tranformDate(date):
+    date = date.replace("T"," ")
+    date = date.replace(":00.000Z", "")
+    return date
+
 @app.route('/')
 def main():
     patient = getAllPatientData()
@@ -44,8 +50,100 @@ def main():
 
 @app.route('/calendar')
 def calendar():
-    return render_template("planning.html")
+    return render_template("planning.html", booked = getMyAppointements())
 
+
+@app.route('/refuseAppointment', methods=['GET', 'POST'])
+def refuse():
+    if request.method == "POST":
+        id = request.form.get("id")
+        res = get("appointment", id).json()
+        res["status"] = "cancelled"
+        put("appointment", json.dumps(res), id)
+    return appointment()
+
+
+@app.route('/scheduleAppointment', methods=['GET', 'POST'])
+def schedule():
+    if request.method == "POST":
+        id = request.form.get("id")
+        start = request.form.get("start")
+        end = request.form.get("end")
+        print(start, end)
+        res = get("appointment", id).json()
+        res["status"] = "pending"
+        put("appointment", json.dumps(res), id)
+    return appointment()
+
+
+@app.route('/newObservation', methods=['GET', 'POST'])
+def postObservation():
+    now = datetime.datetime.now()
+    id = request.form.get('patientID')
+    nb_kilo = request.form.get('weight')
+    resu = {
+        "resourceType": "Observation",
+        "status": "final",
+        "performer": [
+          {
+            "reference": "Practitioner/"+userID
+          }],
+        "subject": {
+            "reference": "Patient/"+id
+        },
+        "effectiveDateTime": "2018-09-28T00:10:30.000Z",
+        "category": [
+            {
+            "coding": [
+                {
+                  "system": "http://hl7.org/fhir/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital Signs"
+                }
+              ]
+            }
+        ],
+        "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "29463-7",
+                "display": "Body Weight"
+              },
+              {
+                "system": "http://loinc.org",
+                "code": "3141-9",
+                "display": "Body weight Measured"
+              },
+              {
+                "system": "http://snomed.info/sct",
+                "code": "27113001",
+                "display": "Body weight"
+              },
+              {
+                "system": "http://acme.org/devices/clinical-codes",
+                "code": "body-weight",
+                "display": "Body Weight"
+              }
+            ]
+          },
+        "valueQuantity": {
+        "value": int(nb_kilo),
+        "unit": "kg"
+        }
+    }
+    print(post("observation", json.dumps(resu), id).content)
+    return main()
+
+
+@app.route('/acceptAppointment', methods=['GET', 'POST'])
+def accept():
+    if request.method == "POST":
+        id = request.form.get("id")
+        res = get("appointment", id).json()
+        res["status"] = "booked"
+        put("appointment", json.dumps(res), id)
+    return appointment()
 
 
 @app.route('/appointment')
@@ -183,8 +281,15 @@ def delete(job, id):
     return res
 
 
-def put(job, data, id):
-    res = requests.put(base_URL+job+"/"+id, data)
+def put(job, datas, id):
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    res = requests.put(base_URL+job+"/"+id, data = datas, headers=headers)
+    return res
+
+
+def post(job, datas, id):
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    res = requests.post(base_URL+job+"/"+id, data = datas, headers=headers)
     return res
 
 

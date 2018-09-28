@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b562104e-364c-49be-8149-be784f42b5c2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/requirement.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/bootstrap-datetimepicker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/datetimepicker.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/appointment.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/appointment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/planning.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/planning.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +17,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/untitled$untitled.coverage" NAME="untitled Coverage Results" MODIFIED="1537881031075" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/AledMoussa$untitled.coverage" NAME="untitled Coverage Results" MODIFIED="1537965997100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/AledMoussa$untitled.coverage" NAME="untitled Coverage Results" MODIFIED="1538125962956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -85,20 +87,23 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="435" />
-          <entry key="py" value="1918" />
+          <entry key="css" value="14" />
+          <entry key="html" value="1492" />
+          <entry key="py" value="2604" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="435" />
-          <entry key="Python" value="1918" />
+          <entry key="CSS" value="14" />
+          <entry key="HTML" value="1492" />
+          <entry key="Python" value="2604" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="9" />
-          <entry key="js" value="1" />
+          <entry key="css" value="2" />
+          <entry key="html" value="11" />
+          <entry key="js" value="2" />
           <entry key="md" value="1" />
           <entry key="py" value="13" />
           <entry key="txt" value="1" />
@@ -106,14 +111,18 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="9" />
-          <entry key="JavaScript" value="1" />
+          <entry key="CSS" value="2" />
+          <entry key="HTML" value="11" />
+          <entry key="JavaScript" value="2" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Python" value="13" />
         </counts>
       </usages-collector>
     </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="AledMoussa" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -129,23 +138,52 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="60" column="60" lean-forward="true" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
+            <state relative-caret-position="253">
+              <caret line="71" column="24" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
-                <marker date="1537964714763" expanded="true" signature="544:1293" ph="..." />
-                <marker date="1537964714763" expanded="true" signature="4264:4266" ph="..." />
-                <marker date="1537964714763" expanded="true" signature="5113:5272" ph="..." />
+                <marker date="1538122535664" expanded="true" signature="556:1447" ph="..." />
+                <marker date="1538122535664" expanded="true" signature="1429:1447" ph="..." />
+                <marker date="1538122535664" expanded="true" signature="1758:4374" ph="..." />
+                <marker date="1538122535664" expanded="true" signature="7135:7137" ph="..." />
+                <marker date="1538122535664" expanded="true" signature="7984:8143" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1326">
+              <caret line="163" column="15" lean-forward="true" selection-start-line="163" selection-start-column="15" selection-end-line="163" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/planning.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="384">
+              <caret line="92" column="39" selection-start-line="92" selection-start-column="39" selection-end-line="92" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/appointment.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="88" column="36" lean-forward="true" selection-start-line="88" selection-start-column="36" selection-end-line="88" selection-end-column="36" />
+            <state relative-caret-position="209">
+              <caret line="236" column="25" lean-forward="true" selection-start-line="236" selection-start-column="25" selection-end-line="236" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/css/datetimepicker.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="7" column="443" selection-start-line="7" selection-start-column="443" selection-end-line="7" selection-end-column="443" />
             </state>
           </provider>
         </entry>
@@ -153,8 +191,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/bootstrap-datetimepicker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="1303" column="17" lean-forward="true" selection-start-line="1303" selection-start-column="17" selection-end-line="1303" selection-end-column="17" />
+            <state relative-caret-position="491">
+              <caret line="1278" column="68" selection-start-line="1278" selection-start-column="68" selection-end-line="1278" selection-end-column="68" />
               <folding>
                 <element signature="e#28#36#1" expanded="true" />
                 <element signature="e#94#102#1" expanded="true" />
@@ -163,11 +201,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/requirement.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="19" column="15" lean-forward="true" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+            <state relative-caret-position="299">
+              <caret line="13" column="18" lean-forward="true" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -175,7 +213,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/register.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="77">
               <caret line="31" column="108" selection-start-line="31" selection-start-column="108" selection-end-line="31" selection-end-column="108" />
             </state>
           </provider>
@@ -184,8 +222,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+            <state relative-caret-position="-1636">
+              <caret line="37" column="84" lean-forward="true" selection-start-line="37" selection-start-column="84" selection-end-line="37" selection-end-column="84" />
             </state>
           </provider>
         </entry>
@@ -196,20 +234,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Flask Main" />
-        <option value="CSS File" />
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>panel-do</find>
-      <find>myPatients</find>
-      <find>mr</find>
-      <find>m</find>
-      <find>m'</find>
-      <find>MR</find>
       <find>font</find>
       <find>bold</find>
       <find>background-color</find>
@@ -224,7 +256,22 @@
       <find>#d5d5d5</find>
       <find>em</find>
       <find>appointmentType</find>
+      <find>2x</find>
+      <find>250</find>
+      <find>datetimepick</find>
+      <find>accept</find>
       <find>print</find>
+      <find>put</find>
+      <find>cance</find>
+      <find>pa</find>
+      <find>plannu</find>
+      <find>{{</find>
+      <find>patient</find>
+      <find>start</find>
+      <find>datetime</find>
+      <find>refuse</find>
+      <find>zIndex</find>
+      <find>index</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -238,10 +285,8 @@
         <option value="$PROJECT_DIR$/templates/subTemplates/planning.html" />
         <option value="$PROJECT_DIR$/templates/subTemplates/sideBar.html" />
         <option value="$PROJECT_DIR$/static/css/main.css" />
-        <option value="$PROJECT_DIR$/templates/planning.html" />
         <option value="$PROJECT_DIR$/static/js/calendar.js" />
         <option value="$PROJECT_DIR$/static/css/styles.css" />
-        <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/static/css/calendar.css" />
         <option value="$PROJECT_DIR$/templates/subTemplates/head.html" />
         <option value="D:/Desktop/dataPlatform-master/app.py" />
@@ -251,10 +296,13 @@
         <option value="$PROJECT_DIR$/utils/app_init.py" />
         <option value="$PROJECT_DIR$/templates/register.html" />
         <option value="$PROJECT_DIR$/templates/login.html" />
-        <option value="$PROJECT_DIR$/app.py" />
-        <option value="$PROJECT_DIR$/templates/appointment.html" />
         <option value="$PROJECT_DIR$/static/js/bootstrap-datetimepicker.js" />
         <option value="$PROJECT_DIR$/requirement.txt" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/templates/planning.html" />
+        <option value="$PROJECT_DIR$/static/css/datetimepicker.css" />
+        <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/templates/appointment.html" />
       </list>
     </option>
   </component>
@@ -265,10 +313,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="20" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -287,6 +335,12 @@
               <item name="AledMoussa" type="b2602c69:ProjectViewProjectNode" />
               <item name="AledMoussa" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AledMoussa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AledMoussa" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AledMoussa" type="b2602c69:ProjectViewProjectNode" />
@@ -318,11 +372,6 @@
             </path>
             <path>
               <item name="AledMoussa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AledMoussa" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AledMoussa" type="b2602c69:ProjectViewProjectNode" />
               <item name="dataPlatform-master" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -338,7 +387,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.project" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -429,26 +478,35 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26066098" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4985294" visible="true" weight="0.1684435" />
+      <window_info id="Structure" order="1" sideWeight="0.50121653" side_tool="true" weight="0.1684435" />
+      <window_info id="Favorites" order="2" sideWeight="0.50147057" side_tool="true" visible="true" weight="0.1684435" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.29515418" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.25110132" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32929516" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5010661" side_tool="true" weight="0.329718" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.329718" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32929516" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32929516" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -560,13 +618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/planning.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Desktop/dataPlatform-master/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -615,13 +666,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="61" column="47" lean-forward="true" selection-start-line="61" selection-start-column="47" selection-end-line="61" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/app_init.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -640,24 +684,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/subTemplates/passReset.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="40" lean-forward="true" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/register.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="77">
           <caret line="31" column="108" selection-start-line="31" selection-start-column="108" selection-end-line="31" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirement.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="13" column="18" lean-forward="true" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+        <state relative-caret-position="-1636">
+          <caret line="37" column="84" lean-forward="true" selection-start-line="37" selection-start-column="84" selection-end-line="37" selection-end-column="84" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/subTemplates/passReset.html">
+    <entry file="file://$PROJECT_DIR$/templates/planning.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="40" lean-forward="true" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+        <state relative-caret-position="384">
+          <caret line="92" column="39" selection-start-line="92" selection-start-column="39" selection-end-line="92" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/datetimepicker.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="443" selection-start-line="7" selection-start-column="443" selection-end-line="7" selection-end-column="443" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/bootstrap-datetimepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="1278" column="68" selection-start-line="1278" selection-start-column="68" selection-end-line="1278" selection-end-column="68" />
+          <folding>
+            <element signature="e#28#36#1" expanded="true" />
+            <element signature="e#94#102#1" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -670,39 +746,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="60" column="60" lean-forward="true" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
+        <state relative-caret-position="253">
+          <caret line="71" column="24" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
-            <marker date="1537964714763" expanded="true" signature="544:1293" ph="..." />
-            <marker date="1537964714763" expanded="true" signature="4264:4266" ph="..." />
-            <marker date="1537964714763" expanded="true" signature="5113:5272" ph="..." />
+            <marker date="1538122535664" expanded="true" signature="556:1447" ph="..." />
+            <marker date="1538122535664" expanded="true" signature="1429:1447" ph="..." />
+            <marker date="1538122535664" expanded="true" signature="1758:4374" ph="..." />
+            <marker date="1538122535664" expanded="true" signature="7135:7137" ph="..." />
+            <marker date="1538122535664" expanded="true" signature="7984:8143" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1326">
+          <caret line="163" column="15" lean-forward="true" selection-start-line="163" selection-start-column="15" selection-end-line="163" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/appointment.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="88" column="36" lean-forward="true" selection-start-line="88" selection-start-column="36" selection-end-line="88" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/bootstrap-datetimepicker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="1303" column="17" lean-forward="true" selection-start-line="1303" selection-start-column="17" selection-end-line="1303" selection-end-column="17" />
-          <folding>
-            <element signature="e#28#36#1" expanded="true" />
-            <element signature="e#94#102#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirement.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="15" lean-forward="true" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+        <state relative-caret-position="209">
+          <caret line="236" column="25" lean-forward="true" selection-start-line="236" selection-start-column="25" selection-end-line="236" selection-end-column="25" />
         </state>
       </provider>
     </entry>

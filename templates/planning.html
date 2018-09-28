@@ -90,7 +90,7 @@
 
 			// make the event draggable using jQuery UI
 			$(this).draggable({
-				zIndex: 999,
+				zIndex: 999999999999999,
 				revert: true,      // will cause the event to go back to its
 				revertDuration: 0  //  original position after the drag
 			});
@@ -167,50 +167,14 @@
 			},
 
 			events: [
+                {% for book in booked %}
 				{
-					title: 'All Day Event',
-					start: new Date(y, m, 1)
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d-3, 16, 0),
-					allDay: false,
-					className: 'info'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d+4, 16, 0),
-					allDay: false,
-					className: 'info'
-				},
-				{
-					title: 'Meeting',
-					start: new Date(y, m, d, 10, 30),
-					allDay: false,
+					title: "{{ book['reason'] }} pour {{ book['name'] }}",
+					start: new Date({{ book['start'][0:4] }}, {{ book['start'][5:7] }}, {{ book['start'][8:10] }}, {{ book['start'][11:13] }},{{ book['start'][14:16] }}),
+					end: new Date({{ book['end'][0:4] }}, {{ book['end'][5:7] }}, {{ book['end'][8:10] }}, {{ book['end'][11:13] }},{{ book['end'][14:16] }}),
 					className: 'important'
 				},
-				{
-					title: 'Lunch',
-					start: new Date(y, m, d, 12, 0),
-					end: new Date(y, m, d, 14, 0),
-					allDay: false,
-					className: 'important'
-				},
-				{
-					title: 'Birthday Party',
-					start: new Date(y, m, d+1, 19, 0),
-					end: new Date(y, m, d+1, 22, 30),
-					allDay: false,
-				},
-				{
-					title: 'Click for Google',
-					start: new Date(y, m, 28),
-					end: new Date(y, m, 29),
-					url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
-					className: 'success'
-				}
+                {% endfor %}
 			],
 		});
 
